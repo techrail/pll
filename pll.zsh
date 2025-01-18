@@ -50,7 +50,7 @@ case $__zshy_pll_primary_action in
 
     __zshy_pll_jobset_name=$1
 
-    source ${0:a:h}/new.zsh $__zshy_pll_jobset_name
+    source ${0:a:h}/new_jobset.zsh $__zshy_pll_jobset_name
     ;;
   addjob)
     # We have to accept two arguments. First one is the jobset name. Second one is the job itself
@@ -65,7 +65,7 @@ case $__zshy_pll_primary_action in
     # Call the script now to schedule the program
     source ${0:a:h}/add_job.zsh $__zshy_pll_jobset_name $__zshy_pll_job_cmd
     ;;
-  monitor|start)
+  start)
     # We have to accept just one argument - the name of the jobset 
     if [ $# -ne 1 ]; then
       echo "E#29DA7J: Only 1 argument (jobset name) is required!"
@@ -75,7 +75,10 @@ case $__zshy_pll_primary_action in
     __zshy_pll_jobset_name=$1
 
     # Call the script now to schedule the program
-    source ${0:a:h}/monitor.zsh $__zshy_pll_jobset_name 
+    source ${0:a:h}/start_and_monitor_jobset.zsh $__zshy_pll_jobset_name 1>"$ZSHY_PLL_HOME/$__zshy_pll_jobset_name/logfile" 2>"$ZSHY_PLL_HOME/$__zshy_pll_jobset_name/logfile" &!
+    echo "The job runner has been started. You can tail the following logfile to check the runner output:\n"
+    echo "$ZSHY_PLL_HOME/$__zshy_pll_jobset_name/logfile"
+    echo "\n"
     ;;
   help|--help)
     source ${0:a:h}/help.zsh $0

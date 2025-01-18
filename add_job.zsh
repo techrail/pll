@@ -39,37 +39,31 @@ __jobdir="$ZSHY_PLL_HOME/$1/jobs/$__zshy_pll_curr_job_num"
 mkdir -p "$__jobdir"
 
 # Try to create the statusfile, stdout, stderr, priority, cmd file and the data directory
-# WARNING: PRIORITY FEATURE IS NOT YET IMPLEMENTED
 echo "normal" > "$__jobdir/priority"
-
 if [ $? -ne 0 ]; then
   echo "E#29455X: Setting priority for job #( $__zshy_pll_curr_job_num ) failed."
   return 25
 fi 
 
 echo "$2" > "$__jobdir/cmd"
-
 if [ $? -ne 0 ]; then
   echo "E#294563: Saving command for job #( $__zshy_pll_curr_job_num ) failed."
   return 25
 fi 
 
 echo "" > "$__jobdir/stdout"
-
 if [ $? -ne 0 ]; then
   echo "E#294569: Creating the stdout file for job #( $__zshy_pll_curr_job_num ) failed."
   return 25
 fi 
 
 echo "" > "$__jobdir/stderr"
-
 if [ $? -ne 0 ]; then
   echo "E#29456I: Creating the stderr file for job #( $__zshy_pll_curr_job_num ) failed."
   return 25
 fi 
 
-echo "unlaunched" > "$__jobdir/status"
-
+echo "pending" > "$__jobdir/status"
 if [ $? -ne 0 ]; then
   echo "E#29456O: Incrementing the job count ( $__zshy_pll_curr_job_num ) failed."
   return 25
@@ -80,3 +74,5 @@ if [ $? -ne 0 ]; then
   echo "E#29DFRF: Could not set the new pjc"
   return 25
 fi
+
+

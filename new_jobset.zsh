@@ -58,6 +58,17 @@ fi
 
 echo "Creating jobs directory: $ZSHY_PLL_HOME/$__jobset/jobs/"
 mkdir -p "$ZSHY_PLL_HOME/$__jobset/jobs"
+if [ $? -ne 0 ]; then
+  echo "E#29VQQS: jobs directory creation failed!!"
+  return 15
+fi 
+
+echo "Creating common data directory: $ZSHY_PLL_HOME/$__jobset/cdata/"
+mkdir -p "$ZSHY_PLL_HOME/$__jobset/cdata"
+if [ $? -ne 0 ]; then
+  echo "E#29VQTO: Common data directory creation failed!!"
+  return 15
+fi 
 
 echo "Jobset $__jobset is ready to get jobs"
 

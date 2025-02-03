@@ -80,6 +80,10 @@ case $__zshy_pll_primary_action in
     echo "$ZSHY_PLL_HOME/$__zshy_pll_jobset_name/logfile"
     echo "\n"
     ;;
+  tail)
+    # we will check the log file of jobs now
+    echo "This feature is not yet implemented."
+    ;;
   help|--help)
     source ${0:a:h}/help.zsh $0
     ;;
